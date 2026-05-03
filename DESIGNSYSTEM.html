@@ -1,0 +1,1316 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Apex — Design System</title>
+<link href="https://fonts.googleapis.com/css2?family=Sora:wght@300;400;500;600;700&family=DM+Sans:ital,wght@0,300;0,400;0,500;0,600;1,300&family=Geist+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+:root {
+  /* ── ARCTIC CLEAN (Light) ── */
+  --arctic-bg:           #ffffff;
+  --arctic-bg-2:         #f8fafc;
+  --arctic-bg-3:         #f1f5f9;
+  --arctic-border:       #e2e8f0;
+  --arctic-border-soft:  #f1f5f9;
+  --arctic-text-primary: #0f172a;
+  --arctic-text-second:  #475569;
+  --arctic-text-muted:   #94a3b8;
+  --arctic-accent:       #0ea5e9;
+  --arctic-accent-soft:  #e0f2fe;
+  --arctic-accent-2:     #6366f1;
+  --arctic-accent-2-soft:#ede9fe;
+  --arctic-success:      #10b981;
+  --arctic-success-soft: #d1fae5;
+  --arctic-warning:      #f59e0b;
+  --arctic-warning-soft: #fef3c7;
+  --arctic-danger:       #ef4444;
+  --arctic-danger-soft:  #fee2e2;
+  --arctic-shadow-sm:    0 1px 3px rgba(15,23,42,0.06), 0 1px 2px rgba(15,23,42,0.04);
+  --arctic-shadow-md:    0 4px 16px rgba(15,23,42,0.08), 0 2px 6px rgba(15,23,42,0.04);
+  --arctic-shadow-lg:    0 12px 40px rgba(15,23,42,0.10), 0 4px 12px rgba(15,23,42,0.06);
+
+  /* ── OBSIDIAN PREMIUM (Dark) ── */
+  --obsidian-bg:           #0d0d0f;
+  --obsidian-bg-2:         #111114;
+  --obsidian-bg-3:         #16161a;
+  --obsidian-border:       #1e1e26;
+  --obsidian-border-soft:  #16161c;
+  --obsidian-text-primary: #f0f4ff;
+  --obsidian-text-second:  #8892a4;
+  --obsidian-text-muted:   #454d5e;
+  --obsidian-accent:       #3b82f6;
+  --obsidian-accent-soft:  rgba(59,130,246,0.10);
+  --obsidian-accent-2:     #06b6d4;
+  --obsidian-accent-2-soft:rgba(6,182,212,0.10);
+  --obsidian-success:      #10b981;
+  --obsidian-success-soft: rgba(16,185,129,0.10);
+  --obsidian-warning:      #f59e0b;
+  --obsidian-warning-soft: rgba(245,158,11,0.10);
+  --obsidian-danger:       #ef4444;
+  --obsidian-danger-soft:  rgba(239,68,68,0.10);
+  --obsidian-glow-blue:    0 0 24px rgba(59,130,246,0.15);
+  --obsidian-glow-cyan:    0 0 24px rgba(6,182,212,0.12);
+  --obsidian-shadow-sm:    0 1px 3px rgba(0,0,0,0.4);
+  --obsidian-shadow-md:    0 4px 16px rgba(0,0,0,0.5);
+  --obsidian-shadow-lg:    0 12px 40px rgba(0,0,0,0.6);
+
+  /* ── SHARED TYPOGRAPHY ── */
+  --font-display: 'Sora', sans-serif;
+  --font-body:    'DM Sans', sans-serif;
+  --font-mono:    'Geist Mono', monospace;
+
+  /* ── SHARED SPACING ── */
+  --space-1: 4px;
+  --space-2: 8px;
+  --space-3: 12px;
+  --space-4: 16px;
+  --space-5: 20px;
+  --space-6: 24px;
+  --space-8: 32px;
+  --space-10: 40px;
+  --space-12: 48px;
+
+  /* ── SHARED RADIUS ── */
+  --radius-sm:  6px;
+  --radius-md:  10px;
+  --radius-lg:  14px;
+  --radius-xl:  20px;
+  --radius-full: 9999px;
+}
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+body {
+  background: #08080a;
+  font-family: var(--font-body);
+  color: #fff;
+  padding: 48px 32px;
+  min-height: 100vh;
+}
+
+/* ── PAGE STRUCTURE ── */
+.ds-header {
+  text-align: center;
+  margin-bottom: 64px;
+}
+
+.ds-eyebrow {
+  font-family: var(--font-mono);
+  font-size: 10px;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: #333;
+  margin-bottom: 12px;
+}
+
+.ds-title {
+  font-family: var(--font-display);
+  font-size: 32px;
+  font-weight: 700;
+  letter-spacing: -0.04em;
+  color: #fff;
+  margin-bottom: 8px;
+}
+
+.ds-subtitle {
+  font-size: 13px;
+  color: #444;
+  letter-spacing: 0.01em;
+}
+
+/* Toggle */
+.theme-toggle {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  margin-bottom: 64px;
+}
+
+.toggle-label {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+
+.toggle-label.light { color: #0ea5e9; }
+.toggle-label.dark  { color: #3b82f6; }
+
+.toggle-track {
+  width: 52px;
+  height: 28px;
+  background: #1a1a1f;
+  border-radius: 14px;
+  border: 1px solid #2a2a32;
+  cursor: pointer;
+  position: relative;
+  transition: background 0.3s;
+}
+
+.toggle-thumb {
+  position: absolute;
+  top: 3px;
+  left: 3px;
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  background: #0ea5e9;
+  transition: transform 0.3s cubic-bezier(0.34,1.56,0.64,1), background 0.3s;
+}
+
+.toggle-track.active .toggle-thumb {
+  transform: translateX(24px);
+  background: #3b82f6;
+}
+
+/* Section */
+.section {
+  margin-bottom: 56px;
+}
+
+.section-title {
+  font-family: var(--font-mono);
+  font-size: 10px;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: #2a2a32;
+  margin-bottom: 20px;
+  padding-bottom: 12px;
+  border-bottom: 1px solid #111116;
+}
+
+/* ── SIDE BY SIDE PANELS ── */
+.two-col {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 20px;
+}
+
+/* ── ARCTIC PANEL ── */
+.arctic {
+  background: var(--arctic-bg);
+  border-radius: var(--radius-xl);
+  padding: var(--space-8);
+  color: var(--arctic-text-primary);
+}
+
+/* ── OBSIDIAN PANEL ── */
+.obsidian {
+  background: var(--obsidian-bg);
+  border-radius: var(--radius-xl);
+  padding: var(--space-8);
+  color: var(--obsidian-text-primary);
+  border: 1px solid var(--obsidian-border);
+  position: relative;
+  overflow: hidden;
+}
+
+.obsidian::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, rgba(59,130,246,0.5) 40%, rgba(6,182,212,0.4) 60%, transparent);
+}
+
+/* Panel label */
+.panel-label {
+  font-family: var(--font-mono);
+  font-size: 9px;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  margin-bottom: 20px;
+  padding: 4px 10px;
+  border-radius: var(--radius-full);
+  display: inline-block;
+}
+
+.arctic .panel-label {
+  color: var(--arctic-accent);
+  background: var(--arctic-accent-soft);
+}
+
+.obsidian .panel-label {
+  color: var(--obsidian-accent);
+  background: var(--obsidian-accent-soft);
+  border: 1px solid rgba(59,130,246,0.2);
+}
+
+/* ── COLORS ── */
+.color-grid {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 8px;
+}
+
+.color-swatch {
+  border-radius: var(--radius-md);
+  overflow: hidden;
+}
+
+.swatch-color {
+  height: 48px;
+  width: 100%;
+}
+
+.swatch-info {
+  padding: 6px 4px;
+}
+
+.swatch-name {
+  font-family: var(--font-mono);
+  font-size: 9px;
+  letter-spacing: 0.05em;
+  margin-bottom: 2px;
+}
+
+.swatch-hex {
+  font-family: var(--font-mono);
+  font-size: 9px;
+}
+
+.arctic .swatch-name { color: var(--arctic-text-second); }
+.arctic .swatch-hex  { color: var(--arctic-text-muted); }
+.obsidian .swatch-name { color: var(--obsidian-text-second); }
+.obsidian .swatch-hex  { color: var(--obsidian-text-muted); }
+
+/* ── TYPOGRAPHY ── */
+.type-row {
+  margin-bottom: 16px;
+  padding-bottom: 16px;
+}
+
+.arctic .type-row { border-bottom: 1px solid var(--arctic-border); }
+.obsidian .type-row { border-bottom: 1px solid var(--obsidian-border); }
+
+.type-row:last-child { border-bottom: none; margin-bottom: 0; padding-bottom: 0; }
+
+.type-meta {
+  font-family: var(--font-mono);
+  font-size: 9px;
+  letter-spacing: 0.08em;
+  margin-bottom: 4px;
+}
+
+.arctic .type-meta { color: var(--arctic-text-muted); }
+.obsidian .type-meta { color: var(--obsidian-text-muted); }
+
+.t-display { font-family: var(--font-display); font-size: 28px; font-weight: 700; letter-spacing: -0.04em; line-height: 1.1; }
+.t-heading { font-family: var(--font-display); font-size: 18px; font-weight: 600; letter-spacing: -0.025em; }
+.t-subhead { font-family: var(--font-display); font-size: 14px; font-weight: 500; letter-spacing: -0.01em; }
+.t-body     { font-family: var(--font-body); font-size: 13px; font-weight: 400; line-height: 1.6; }
+.t-caption  { font-family: var(--font-body); font-size: 11px; font-weight: 400; }
+.t-mono     { font-family: var(--font-mono); font-size: 12px; font-weight: 500; letter-spacing: 0.02em; }
+.t-label    { font-family: var(--font-mono); font-size: 10px; font-weight: 500; letter-spacing: 0.12em; text-transform: uppercase; }
+
+.arctic .t-display { color: var(--arctic-text-primary); }
+.arctic .t-heading { color: var(--arctic-text-primary); }
+.arctic .t-subhead { color: var(--arctic-text-primary); }
+.arctic .t-body    { color: var(--arctic-text-second); }
+.arctic .t-caption { color: var(--arctic-text-muted); }
+.arctic .t-mono    { color: var(--arctic-accent); }
+.arctic .t-label   { color: var(--arctic-text-muted); }
+
+.obsidian .t-display { color: var(--obsidian-text-primary); }
+.obsidian .t-heading { color: var(--obsidian-text-primary); }
+.obsidian .t-subhead { color: var(--obsidian-text-primary); }
+.obsidian .t-body    { color: var(--obsidian-text-second); }
+.obsidian .t-caption { color: var(--obsidian-text-muted); }
+.obsidian .t-mono    { color: var(--obsidian-accent); }
+.obsidian .t-label   { color: var(--obsidian-text-muted); }
+
+/* ── BUTTONS ── */
+.btn-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-bottom: 10px;
+}
+
+.btn {
+  font-family: var(--font-display);
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: -0.01em;
+  padding: 9px 18px;
+  border-radius: var(--radius-md);
+  border: none;
+  cursor: pointer;
+  transition: all 0.15s;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+}
+
+/* Arctic buttons */
+.arctic .btn-primary {
+  background: var(--arctic-accent);
+  color: #fff;
+  box-shadow: 0 2px 8px rgba(14,165,233,0.3);
+}
+.arctic .btn-secondary {
+  background: var(--arctic-bg-3);
+  color: var(--arctic-text-primary);
+}
+.arctic .btn-ghost {
+  background: transparent;
+  color: var(--arctic-accent);
+  border: 1.5px solid var(--arctic-accent);
+}
+.arctic .btn-danger {
+  background: var(--arctic-danger-soft);
+  color: var(--arctic-danger);
+}
+.arctic .btn-sm {
+  font-size: 11px;
+  padding: 5px 12px;
+  border-radius: var(--radius-sm);
+}
+
+/* Obsidian buttons */
+.obsidian .btn-primary {
+  background: var(--obsidian-accent);
+  color: #fff;
+  box-shadow: 0 2px 12px rgba(59,130,246,0.3);
+}
+.obsidian .btn-secondary {
+  background: var(--obsidian-bg-3);
+  color: var(--obsidian-text-primary);
+  border: 1px solid var(--obsidian-border);
+}
+.obsidian .btn-ghost {
+  background: transparent;
+  color: var(--obsidian-accent);
+  border: 1.5px solid rgba(59,130,246,0.3);
+}
+.obsidian .btn-danger {
+  background: var(--obsidian-danger-soft);
+  color: var(--obsidian-danger);
+}
+.obsidian .btn-sm {
+  font-size: 11px;
+  padding: 5px 12px;
+  border-radius: var(--radius-sm);
+}
+
+/* ── BADGES / TAGS ── */
+.badge-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+
+.badge {
+  font-family: var(--font-mono);
+  font-size: 9px;
+  font-weight: 500;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  padding: 3px 9px;
+  border-radius: var(--radius-full);
+}
+
+.arctic .badge-blue    { background: var(--arctic-accent-soft); color: var(--arctic-accent); }
+.arctic .badge-purple  { background: var(--arctic-accent-2-soft); color: var(--arctic-accent-2); }
+.arctic .badge-green   { background: var(--arctic-success-soft); color: var(--arctic-success); }
+.arctic .badge-yellow  { background: var(--arctic-warning-soft); color: var(--arctic-warning); }
+.arctic .badge-red     { background: var(--arctic-danger-soft); color: var(--arctic-danger); }
+.arctic .badge-gray    { background: var(--arctic-bg-3); color: var(--arctic-text-muted); }
+
+.obsidian .badge-blue   { background: var(--obsidian-accent-soft); color: var(--obsidian-accent); border: 1px solid rgba(59,130,246,0.2); }
+.obsidian .badge-cyan   { background: var(--obsidian-accent-2-soft); color: var(--obsidian-accent-2); border: 1px solid rgba(6,182,212,0.2); }
+.obsidian .badge-green  { background: var(--obsidian-success-soft); color: var(--obsidian-success); border: 1px solid rgba(16,185,129,0.2); }
+.obsidian .badge-yellow { background: var(--obsidian-warning-soft); color: var(--obsidian-warning); border: 1px solid rgba(245,158,11,0.2); }
+.obsidian .badge-red    { background: var(--obsidian-danger-soft); color: var(--obsidian-danger); border: 1px solid rgba(239,68,68,0.2); }
+.obsidian .badge-gray   { background: var(--obsidian-bg-3); color: var(--obsidian-text-muted); border: 1px solid var(--obsidian-border); }
+
+/* ── CARDS ── */
+.card {
+  border-radius: var(--radius-lg);
+  padding: var(--space-5);
+  margin-bottom: 10px;
+}
+
+.arctic .card {
+  background: var(--arctic-bg-2);
+  border: 1px solid var(--arctic-border-soft);
+  box-shadow: var(--arctic-shadow-sm);
+}
+
+.obsidian .card {
+  background: var(--obsidian-bg-2);
+  border: 1px solid var(--obsidian-border);
+  position: relative;
+  overflow: hidden;
+}
+
+.obsidian .card::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, rgba(255,255,255,0.04), transparent);
+}
+
+.card-title {
+  font-family: var(--font-display);
+  font-size: 13px;
+  font-weight: 600;
+  letter-spacing: -0.01em;
+  margin-bottom: 4px;
+}
+
+.card-sub {
+  font-size: 11px;
+}
+
+.arctic .card-title { color: var(--arctic-text-primary); }
+.arctic .card-sub   { color: var(--arctic-text-muted); }
+.obsidian .card-title { color: var(--obsidian-text-primary); }
+.obsidian .card-sub   { color: var(--obsidian-text-muted); }
+
+/* ── INPUTS ── */
+.input-group {
+  margin-bottom: 10px;
+}
+
+.input-label {
+  font-family: var(--font-mono);
+  font-size: 9px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  margin-bottom: 6px;
+  display: block;
+}
+
+.arctic .input-label { color: var(--arctic-text-muted); }
+.obsidian .input-label { color: var(--obsidian-text-muted); }
+
+.input {
+  width: 100%;
+  font-family: var(--font-body);
+  font-size: 12px;
+  padding: 9px 13px;
+  border-radius: var(--radius-md);
+  outline: none;
+  transition: border-color 0.15s, box-shadow 0.15s;
+}
+
+.arctic .input {
+  background: var(--arctic-bg);
+  border: 1.5px solid var(--arctic-border);
+  color: var(--arctic-text-primary);
+}
+
+.arctic .input:focus {
+  border-color: var(--arctic-accent);
+  box-shadow: 0 0 0 3px rgba(14,165,233,0.12);
+}
+
+.arctic .input::placeholder { color: var(--arctic-text-muted); }
+
+.obsidian .input {
+  background: var(--obsidian-bg-3);
+  border: 1.5px solid var(--obsidian-border);
+  color: var(--obsidian-text-primary);
+}
+
+.obsidian .input:focus {
+  border-color: var(--obsidian-accent);
+  box-shadow: 0 0 0 3px rgba(59,130,246,0.12);
+}
+
+.obsidian .input::placeholder { color: var(--obsidian-text-muted); }
+
+/* ── STAT WIDGET ── */
+.stat-widget {
+  border-radius: var(--radius-lg);
+  padding: var(--space-5);
+}
+
+.arctic .stat-widget {
+  background: var(--arctic-bg-2);
+  border: 1px solid var(--arctic-border-soft);
+}
+
+.obsidian .stat-widget {
+  background: var(--obsidian-bg-2);
+  border: 1px solid var(--obsidian-border);
+}
+
+.stat-label {
+  font-family: var(--font-mono);
+  font-size: 9px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  margin-bottom: 8px;
+}
+
+.arctic .stat-label { color: var(--arctic-text-muted); }
+.obsidian .stat-label { color: var(--obsidian-text-muted); }
+
+.stat-value {
+  font-family: var(--font-display);
+  font-size: 26px;
+  font-weight: 700;
+  letter-spacing: -0.04em;
+  margin-bottom: 4px;
+  line-height: 1;
+}
+
+.stat-change {
+  font-size: 10px;
+  font-family: var(--font-mono);
+  display: inline-flex;
+  align-items: center;
+  gap: 3px;
+  padding: 2px 7px;
+  border-radius: var(--radius-full);
+  font-weight: 500;
+}
+
+.arctic .stat-change.up   { background: var(--arctic-success-soft); color: var(--arctic-success); }
+.arctic .stat-change.down { background: var(--arctic-danger-soft); color: var(--arctic-danger); }
+.obsidian .stat-change.up   { background: var(--obsidian-success-soft); color: var(--obsidian-success); }
+.obsidian .stat-change.down { background: var(--obsidian-danger-soft); color: var(--obsidian-danger); }
+
+.mini-bars {
+  display: flex;
+  align-items: flex-end;
+  gap: 3px;
+  height: 28px;
+  margin-top: 12px;
+}
+
+.mini-bar {
+  flex: 1;
+  border-radius: 2px 2px 0 0;
+  transition: opacity 0.2s;
+}
+
+.arctic .mini-bar         { background: var(--arctic-bg-3); }
+.arctic .mini-bar.active  { background: var(--arctic-accent); }
+.arctic .mini-bar.mid     { background: var(--arctic-accent-soft); }
+
+.obsidian .mini-bar        { background: var(--obsidian-bg-3); }
+.obsidian .mini-bar.active { background: var(--obsidian-accent); }
+.obsidian .mini-bar.mid    { background: rgba(59,130,246,0.25); }
+
+/* ── SPACING SCALE ── */
+.spacing-row {
+  display: flex;
+  align-items: flex-end;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+
+.spacing-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
+}
+
+.spacing-block {
+  background: var(--arctic-accent);
+  border-radius: 3px;
+  width: 100%;
+}
+
+.obsidian .spacing-block { background: var(--obsidian-accent); }
+
+.spacing-token {
+  font-family: var(--font-mono);
+  font-size: 8px;
+  letter-spacing: 0.05em;
+  text-align: center;
+}
+
+.arctic .spacing-token { color: var(--arctic-text-muted); }
+.obsidian .spacing-token { color: var(--obsidian-text-muted); }
+
+/* ── RADIUS SCALE ── */
+.radius-row {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+.radius-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
+}
+
+.radius-box {
+  width: 40px;
+  height: 40px;
+}
+
+.arctic .radius-box   { background: var(--arctic-bg-3); border: 1.5px solid var(--arctic-border); }
+.obsidian .radius-box { background: var(--obsidian-bg-3); border: 1.5px solid var(--obsidian-border); }
+
+.radius-token {
+  font-family: var(--font-mono);
+  font-size: 8px;
+  letter-spacing: 0.05em;
+  text-align: center;
+}
+
+.arctic .radius-token { color: var(--arctic-text-muted); }
+.obsidian .radius-token { color: var(--obsidian-text-muted); }
+
+/* ── DIVIDER ── */
+.ds-divider {
+  height: 1px;
+  background: #111116;
+  margin: 48px 0;
+}
+
+/* ── MOTION NOTE ── */
+.motion-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 8px;
+}
+
+.motion-item {
+  border-radius: var(--radius-md);
+  padding: 14px;
+}
+
+.arctic .motion-item   { background: var(--arctic-bg-2); border: 1px solid var(--arctic-border-soft); }
+.obsidian .motion-item { background: var(--obsidian-bg-2); border: 1px solid var(--obsidian-border); }
+
+.motion-name {
+  font-family: var(--font-mono);
+  font-size: 9px;
+  letter-spacing: 0.08em;
+  margin-bottom: 4px;
+}
+
+.motion-val {
+  font-size: 11px;
+}
+
+.arctic .motion-name { color: var(--arctic-accent); }
+.arctic .motion-val  { color: var(--arctic-text-second); }
+.obsidian .motion-name { color: var(--obsidian-accent); }
+.obsidian .motion-val  { color: var(--obsidian-text-second); }
+
+/* ── ICON SIZES NOTE ── */
+.icon-row {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  flex-wrap: wrap;
+}
+
+.icon-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
+}
+
+.icon-box {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: var(--radius-md);
+}
+
+.arctic .icon-box   { background: var(--arctic-bg-3); color: var(--arctic-text-second); }
+.obsidian .icon-box { background: var(--obsidian-bg-3); color: var(--obsidian-text-second); }
+
+.icon-token {
+  font-family: var(--font-mono);
+  font-size: 8px;
+}
+
+.arctic .icon-token { color: var(--arctic-text-muted); }
+.obsidian .icon-token { color: var(--obsidian-text-muted); }
+
+</style>
+</head>
+<body>
+
+<div class="ds-header">
+  <div class="ds-eyebrow">Apex Agency OS</div>
+  <div class="ds-title">Design System</div>
+  <div class="ds-subtitle">Arctic Clean · Obsidian Premium — two full systems, one toggle</div>
+</div>
+
+<!-- ── COLORS ── -->
+<div class="section">
+  <div class="section-title">01 — Color Tokens</div>
+  <div class="two-col">
+
+    <!-- Arctic Colors -->
+    <div class="arctic">
+      <div class="panel-label">Arctic Clean · Light</div>
+      <div class="color-grid">
+        <div class="color-swatch">
+          <div class="swatch-color" style="background:#ffffff; border:1px solid #e2e8f0;"></div>
+          <div class="swatch-info">
+            <div class="swatch-name">bg</div>
+            <div class="swatch-hex">#ffffff</div>
+          </div>
+        </div>
+        <div class="color-swatch">
+          <div class="swatch-color" style="background:#f8fafc;"></div>
+          <div class="swatch-info">
+            <div class="swatch-name">bg-2</div>
+            <div class="swatch-hex">#f8fafc</div>
+          </div>
+        </div>
+        <div class="color-swatch">
+          <div class="swatch-color" style="background:#0f172a;"></div>
+          <div class="swatch-info">
+            <div class="swatch-name">text</div>
+            <div class="swatch-hex">#0f172a</div>
+          </div>
+        </div>
+        <div class="color-swatch">
+          <div class="swatch-color" style="background:#0ea5e9;"></div>
+          <div class="swatch-info">
+            <div class="swatch-name">accent</div>
+            <div class="swatch-hex">#0ea5e9</div>
+          </div>
+        </div>
+        <div class="color-swatch">
+          <div class="swatch-color" style="background:#6366f1;"></div>
+          <div class="swatch-info">
+            <div class="swatch-name">accent-2</div>
+            <div class="swatch-hex">#6366f1</div>
+          </div>
+        </div>
+        <div class="color-swatch">
+          <div class="swatch-color" style="background:#10b981;"></div>
+          <div class="swatch-info">
+            <div class="swatch-name">success</div>
+            <div class="swatch-hex">#10b981</div>
+          </div>
+        </div>
+        <div class="color-swatch">
+          <div class="swatch-color" style="background:#f59e0b;"></div>
+          <div class="swatch-info">
+            <div class="swatch-name">warning</div>
+            <div class="swatch-hex">#f59e0b</div>
+          </div>
+        </div>
+        <div class="color-swatch">
+          <div class="swatch-color" style="background:#ef4444;"></div>
+          <div class="swatch-info">
+            <div class="swatch-name">danger</div>
+            <div class="swatch-hex">#ef4444</div>
+          </div>
+        </div>
+        <div class="color-swatch">
+          <div class="swatch-color" style="background:#94a3b8;"></div>
+          <div class="swatch-info">
+            <div class="swatch-name">muted</div>
+            <div class="swatch-hex">#94a3b8</div>
+          </div>
+        </div>
+        <div class="color-swatch">
+          <div class="swatch-color" style="background:#e2e8f0;"></div>
+          <div class="swatch-info">
+            <div class="swatch-name">border</div>
+            <div class="swatch-hex">#e2e8f0</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Obsidian Colors -->
+    <div class="obsidian">
+      <div class="panel-label">Obsidian Premium · Dark</div>
+      <div class="color-grid">
+        <div class="color-swatch">
+          <div class="swatch-color" style="background:#0d0d0f; border:1px solid #1e1e26;"></div>
+          <div class="swatch-info">
+            <div class="swatch-name">bg</div>
+            <div class="swatch-hex">#0d0d0f</div>
+          </div>
+        </div>
+        <div class="color-swatch">
+          <div class="swatch-color" style="background:#111114;"></div>
+          <div class="swatch-info">
+            <div class="swatch-name">bg-2</div>
+            <div class="swatch-hex">#111114</div>
+          </div>
+        </div>
+        <div class="color-swatch">
+          <div class="swatch-color" style="background:#f0f4ff;"></div>
+          <div class="swatch-info">
+            <div class="swatch-name">text</div>
+            <div class="swatch-hex">#f0f4ff</div>
+          </div>
+        </div>
+        <div class="color-swatch">
+          <div class="swatch-color" style="background:#3b82f6;"></div>
+          <div class="swatch-info">
+            <div class="swatch-name">accent</div>
+            <div class="swatch-hex">#3b82f6</div>
+          </div>
+        </div>
+        <div class="color-swatch">
+          <div class="swatch-color" style="background:#06b6d4;"></div>
+          <div class="swatch-info">
+            <div class="swatch-name">accent-2</div>
+            <div class="swatch-hex">#06b6d4</div>
+          </div>
+        </div>
+        <div class="color-swatch">
+          <div class="swatch-color" style="background:#10b981;"></div>
+          <div class="swatch-info">
+            <div class="swatch-name">success</div>
+            <div class="swatch-hex">#10b981</div>
+          </div>
+        </div>
+        <div class="color-swatch">
+          <div class="swatch-color" style="background:#f59e0b;"></div>
+          <div class="swatch-info">
+            <div class="swatch-name">warning</div>
+            <div class="swatch-hex">#f59e0b</div>
+          </div>
+        </div>
+        <div class="color-swatch">
+          <div class="swatch-color" style="background:#ef4444;"></div>
+          <div class="swatch-info">
+            <div class="swatch-name">danger</div>
+            <div class="swatch-hex">#ef4444</div>
+          </div>
+        </div>
+        <div class="color-swatch">
+          <div class="swatch-color" style="background:#454d5e;"></div>
+          <div class="swatch-info">
+            <div class="swatch-name">muted</div>
+            <div class="swatch-hex">#454d5e</div>
+          </div>
+        </div>
+        <div class="color-swatch">
+          <div class="swatch-color" style="background:#1e1e26;"></div>
+          <div class="swatch-info">
+            <div class="swatch-name">border</div>
+            <div class="swatch-hex">#1e1e26</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<!-- ── TYPOGRAPHY ── -->
+<div class="section">
+  <div class="section-title">02 — Typography</div>
+  <div class="two-col">
+
+    <div class="arctic">
+      <div class="panel-label">Arctic Clean · Light</div>
+      <div class="type-row">
+        <div class="type-meta">Display · Sora 700 · -0.04em</div>
+        <div class="t-display">$50,350</div>
+      </div>
+      <div class="type-row">
+        <div class="type-meta">Heading · Sora 600 · -0.025em</div>
+        <div class="t-heading">Lead Pipeline</div>
+      </div>
+      <div class="type-row">
+        <div class="type-meta">Subhead · Sora 500 · -0.01em</div>
+        <div class="t-subhead">Active Projects</div>
+      </div>
+      <div class="type-row">
+        <div class="type-meta">Body · DM Sans 400 · 1.6 leading</div>
+        <div class="t-body">Manage your agency's revenue, leads, and projects in one unified workspace.</div>
+      </div>
+      <div class="type-row">
+        <div class="type-meta">Caption · DM Sans 400</div>
+        <div class="t-caption">Last updated 2 minutes ago</div>
+      </div>
+      <div class="type-row">
+        <div class="type-meta">Mono · Geist Mono 500</div>
+        <div class="t-mono">$17,600.00</div>
+      </div>
+      <div class="type-row">
+        <div class="type-meta">Label · Geist Mono 500 · 0.12em · uppercase</div>
+        <div class="t-label">Net Profit</div>
+      </div>
+    </div>
+
+    <div class="obsidian">
+      <div class="panel-label">Obsidian Premium · Dark</div>
+      <div class="type-row">
+        <div class="type-meta">Display · Sora 700 · -0.04em</div>
+        <div class="t-display">$50,350</div>
+      </div>
+      <div class="type-row">
+        <div class="type-meta">Heading · Sora 600 · -0.025em</div>
+        <div class="t-heading">Lead Pipeline</div>
+      </div>
+      <div class="type-row">
+        <div class="type-meta">Subhead · Sora 500 · -0.01em</div>
+        <div class="t-subhead">Active Projects</div>
+      </div>
+      <div class="type-row">
+        <div class="type-meta">Body · DM Sans 400 · 1.6 leading</div>
+        <div class="t-body">Manage your agency's revenue, leads, and projects in one unified workspace.</div>
+      </div>
+      <div class="type-row">
+        <div class="type-meta">Caption · DM Sans 400</div>
+        <div class="t-caption">Last updated 2 minutes ago</div>
+      </div>
+      <div class="type-row">
+        <div class="type-meta">Mono · Geist Mono 500</div>
+        <div class="t-mono">$17,600.00</div>
+      </div>
+      <div class="type-row">
+        <div class="type-meta">Label · Geist Mono 500 · 0.12em · uppercase</div>
+        <div class="t-label">Net Profit</div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<!-- ── BUTTONS ── -->
+<div class="section">
+  <div class="section-title">03 — Buttons</div>
+  <div class="two-col">
+
+    <div class="arctic">
+      <div class="panel-label">Arctic Clean · Light</div>
+      <div class="btn-row">
+        <button class="btn btn-primary">Add Invoice</button>
+        <button class="btn btn-secondary">Cancel</button>
+        <button class="btn btn-ghost">View All</button>
+        <button class="btn btn-danger">Delete</button>
+      </div>
+      <div class="btn-row">
+        <button class="btn btn-primary btn-sm">+ Add Lead</button>
+        <button class="btn btn-secondary btn-sm">Filter</button>
+        <button class="btn btn-ghost btn-sm">Export</button>
+      </div>
+    </div>
+
+    <div class="obsidian">
+      <div class="panel-label">Obsidian Premium · Dark</div>
+      <div class="btn-row">
+        <button class="btn btn-primary">Add Invoice</button>
+        <button class="btn btn-secondary">Cancel</button>
+        <button class="btn btn-ghost">View All</button>
+        <button class="btn btn-danger">Delete</button>
+      </div>
+      <div class="btn-row">
+        <button class="btn btn-primary btn-sm">+ Add Lead</button>
+        <button class="btn btn-secondary btn-sm">Filter</button>
+        <button class="btn btn-ghost btn-sm">Export</button>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<!-- ── BADGES ── -->
+<div class="section">
+  <div class="section-title">04 — Badges & Status</div>
+  <div class="two-col">
+
+    <div class="arctic">
+      <div class="panel-label">Arctic Clean · Light</div>
+      <div class="badge-row">
+        <span class="badge badge-blue">Active</span>
+        <span class="badge badge-purple">Invoice</span>
+        <span class="badge badge-green">Paid</span>
+        <span class="badge badge-yellow">Pending</span>
+        <span class="badge badge-red">Overdue</span>
+        <span class="badge badge-gray">Draft</span>
+        <span class="badge badge-blue">Hot Lead</span>
+        <span class="badge badge-green">Closed</span>
+        <span class="badge badge-yellow">Warm</span>
+        <span class="badge badge-gray">Cold</span>
+      </div>
+    </div>
+
+    <div class="obsidian">
+      <div class="panel-label">Obsidian Premium · Dark</div>
+      <div class="badge-row">
+        <span class="badge badge-blue">Active</span>
+        <span class="badge badge-cyan">Invoice</span>
+        <span class="badge badge-green">Paid</span>
+        <span class="badge badge-yellow">Pending</span>
+        <span class="badge badge-red">Overdue</span>
+        <span class="badge badge-gray">Draft</span>
+        <span class="badge badge-blue">Hot Lead</span>
+        <span class="badge badge-green">Closed</span>
+        <span class="badge badge-yellow">Warm</span>
+        <span class="badge badge-gray">Cold</span>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<!-- ── CARDS + INPUTS ── -->
+<div class="section">
+  <div class="section-title">05 — Cards & Inputs</div>
+  <div class="two-col">
+
+    <div class="arctic">
+      <div class="panel-label">Arctic Clean · Light</div>
+      <div class="card">
+        <div class="card-title">Mike Reynolds — Reynolds HVAC</div>
+        <div class="card-sub">Follow up scheduled · Tomorrow 10am</div>
+      </div>
+      <div class="input-group">
+        <label class="input-label">Client Name</label>
+        <input class="input" placeholder="e.g. Reynolds HVAC" type="text">
+      </div>
+      <div class="input-group">
+        <label class="input-label">Invoice Amount</label>
+        <input class="input" placeholder="$0.00" type="text">
+      </div>
+    </div>
+
+    <div class="obsidian">
+      <div class="panel-label">Obsidian Premium · Dark</div>
+      <div class="card">
+        <div class="card-title">Mike Reynolds — Reynolds HVAC</div>
+        <div class="card-sub">Follow up scheduled · Tomorrow 10am</div>
+      </div>
+      <div class="input-group">
+        <label class="input-label">Client Name</label>
+        <input class="input" placeholder="e.g. Reynolds HVAC" type="text">
+      </div>
+      <div class="input-group">
+        <label class="input-label">Invoice Amount</label>
+        <input class="input" placeholder="$0.00" type="text">
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<!-- ── STAT WIDGETS ── -->
+<div class="section">
+  <div class="section-title">06 — Stat Widgets</div>
+  <div class="two-col">
+
+    <div class="arctic">
+      <div class="panel-label">Arctic Clean · Light</div>
+      <div style="display:grid; grid-template-columns:1fr 1fr; gap:10px;">
+        <div class="stat-widget">
+          <div class="stat-label">Revenue</div>
+          <div class="stat-value" style="color:var(--arctic-accent)">$50,350</div>
+          <span class="stat-change up">↑ 12%</span>
+          <div class="mini-bars">
+            <div class="mini-bar" style="height:35%"></div>
+            <div class="mini-bar mid" style="height:50%"></div>
+            <div class="mini-bar" style="height:45%"></div>
+            <div class="mini-bar mid" style="height:65%"></div>
+            <div class="mini-bar" style="height:55%"></div>
+            <div class="mini-bar mid" style="height:75%"></div>
+            <div class="mini-bar active" style="height:95%"></div>
+          </div>
+        </div>
+        <div class="stat-widget">
+          <div class="stat-label">Net Profit</div>
+          <div class="stat-value" style="color:#10b981">$17,600</div>
+          <span class="stat-change up">↑ 8%</span>
+          <div class="mini-bars">
+            <div class="mini-bar" style="height:40%"></div>
+            <div class="mini-bar" style="height:55%"></div>
+            <div class="mini-bar" style="height:50%"></div>
+            <div class="mini-bar" style="height:68%"></div>
+            <div class="mini-bar" style="height:60%"></div>
+            <div class="mini-bar" style="height:78%"></div>
+            <div class="mini-bar active" style="height:95%; background:#10b981"></div>
+          </div>
+        </div>
+        <div class="stat-widget">
+          <div class="stat-label">Expenses</div>
+          <div class="stat-value" style="color:var(--arctic-text-primary)">$32,750</div>
+          <span class="stat-change down">↓ 3%</span>
+        </div>
+        <div class="stat-widget">
+          <div class="stat-label">Conversion</div>
+          <div class="stat-value" style="color:#6366f1">68%</div>
+          <span class="stat-change up">↑ 4%</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="obsidian">
+      <div class="panel-label">Obsidian Premium · Dark</div>
+      <div style="display:grid; grid-template-columns:1fr 1fr; gap:10px;">
+        <div class="stat-widget">
+          <div class="stat-label">Revenue</div>
+          <div class="stat-value" style="color:var(--obsidian-accent)">$50,350</div>
+          <span class="stat-change up">↑ 12%</span>
+          <div class="mini-bars">
+            <div class="mini-bar" style="height:35%"></div>
+            <div class="mini-bar mid" style="height:50%"></div>
+            <div class="mini-bar" style="height:45%"></div>
+            <div class="mini-bar mid" style="height:65%"></div>
+            <div class="mini-bar" style="height:55%"></div>
+            <div class="mini-bar mid" style="height:75%"></div>
+            <div class="mini-bar active" style="height:95%"></div>
+          </div>
+        </div>
+        <div class="stat-widget">
+          <div class="stat-label">Net Profit</div>
+          <div class="stat-value" style="color:#10b981">$17,600</div>
+          <span class="stat-change up">↑ 8%</span>
+          <div class="mini-bars">
+            <div class="mini-bar" style="height:40%"></div>
+            <div class="mini-bar" style="height:55%"></div>
+            <div class="mini-bar" style="height:50%"></div>
+            <div class="mini-bar" style="height:68%"></div>
+            <div class="mini-bar" style="height:60%"></div>
+            <div class="mini-bar" style="height:78%"></div>
+            <div class="mini-bar active" style="height:95%; background:#10b981"></div>
+          </div>
+        </div>
+        <div class="stat-widget">
+          <div class="stat-label">Expenses</div>
+          <div class="stat-value" style="color:var(--obsidian-text-primary)">$32,750</div>
+          <span class="stat-change down">↓ 3%</span>
+        </div>
+        <div class="stat-widget">
+          <div class="stat-label">Conversion</div>
+          <div class="stat-value" style="color:var(--obsidian-accent-2)">68%</div>
+          <span class="stat-change up">↑ 4%</span>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<!-- ── SPACING & RADIUS ── -->
+<div class="section">
+  <div class="section-title">07 — Spacing & Radius Tokens</div>
+  <div class="two-col">
+
+    <div class="arctic">
+      <div class="panel-label">Spacing Scale</div>
+      <div class="spacing-row">
+        <div class="spacing-item"><div class="spacing-block" style="height:4px; width:20px;"></div><div class="spacing-token" style="color:#94a3b8">space-1<br>4px</div></div>
+        <div class="spacing-item"><div class="spacing-block" style="height:8px; width:24px;"></div><div class="spacing-token" style="color:#94a3b8">space-2<br>8px</div></div>
+        <div class="spacing-item"><div class="spacing-block" style="height:12px; width:28px;"></div><div class="spacing-token" style="color:#94a3b8">space-3<br>12px</div></div>
+        <div class="spacing-item"><div class="spacing-block" style="height:16px; width:32px;"></div><div class="spacing-token" style="color:#94a3b8">space-4<br>16px</div></div>
+        <div class="spacing-item"><div class="spacing-block" style="height:20px; width:36px;"></div><div class="spacing-token" style="color:#94a3b8">space-5<br>20px</div></div>
+        <div class="spacing-item"><div class="spacing-block" style="height:24px; width:40px;"></div><div class="spacing-token" style="color:#94a3b8">space-6<br>24px</div></div>
+        <div class="spacing-item"><div class="spacing-block" style="height:32px; width:48px;"></div><div class="spacing-token" style="color:#94a3b8">space-8<br>32px</div></div>
+        <div class="spacing-item"><div class="spacing-block" style="height:40px; width:56px;"></div><div class="spacing-token" style="color:#94a3b8">space-10<br>40px</div></div>
+      </div>
+      <br>
+      <div class="panel-label">Border Radius</div>
+      <div class="radius-row">
+        <div class="radius-item"><div class="radius-box" style="background:#f1f5f9; border:1.5px solid #e2e8f0; border-radius:6px;"></div><div class="radius-token" style="color:#94a3b8">sm · 6px</div></div>
+        <div class="radius-item"><div class="radius-box" style="background:#f1f5f9; border:1.5px solid #e2e8f0; border-radius:10px;"></div><div class="radius-token" style="color:#94a3b8">md · 10px</div></div>
+        <div class="radius-item"><div class="radius-box" style="background:#f1f5f9; border:1.5px solid #e2e8f0; border-radius:14px;"></div><div class="radius-token" style="color:#94a3b8">lg · 14px</div></div>
+        <div class="radius-item"><div class="radius-box" style="background:#f1f5f9; border:1.5px solid #e2e8f0; border-radius:20px;"></div><div class="radius-token" style="color:#94a3b8">xl · 20px</div></div>
+        <div class="radius-item"><div class="radius-box" style="background:#f1f5f9; border:1.5px solid #e2e8f0; border-radius:9999px; width:56px; height:28px;"></div><div class="radius-token" style="color:#94a3b8">full</div></div>
+      </div>
+    </div>
+
+    <div class="obsidian">
+      <div class="panel-label">Spacing Scale</div>
+      <div class="spacing-row">
+        <div class="spacing-item"><div class="spacing-block" style="height:4px; width:20px; background:#3b82f6;"></div><div class="spacing-token" style="color:#454d5e">space-1<br>4px</div></div>
+        <div class="spacing-item"><div class="spacing-block" style="height:8px; width:24px; background:#3b82f6;"></div><div class="spacing-token" style="color:#454d5e">space-2<br>8px</div></div>
+        <div class="spacing-item"><div class="spacing-block" style="height:12px; width:28px; background:#3b82f6;"></div><div class="spacing-token" style="color:#454d5e">space-3<br>12px</div></div>
+        <div class="spacing-item"><div class="spacing-block" style="height:16px; width:32px; background:#3b82f6;"></div><div class="spacing-token" style="color:#454d5e">space-4<br>16px</div></div>
+        <div class="spacing-item"><div class="spacing-block" style="height:20px; width:36px; background:#3b82f6;"></div><div class="spacing-token" style="color:#454d5e">space-5<br>20px</div></div>
+        <div class="spacing-item"><div class="spacing-block" style="height:24px; width:40px; background:#3b82f6;"></div><div class="spacing-token" style="color:#454d5e">space-6<br>24px</div></div>
+        <div class="spacing-item"><div class="spacing-block" style="height:32px; width:48px; background:#3b82f6;"></div><div class="spacing-token" style="color:#454d5e">space-8<br>32px</div></div>
+        <div class="spacing-item"><div class="spacing-block" style="height:40px; width:56px; background:#3b82f6;"></div><div class="spacing-token" style="color:#454d5e">space-10<br>40px</div></div>
+      </div>
+      <br>
+      <div class="panel-label">Border Radius</div>
+      <div class="radius-row">
+        <div class="radius-item"><div class="radius-box" style="background:#16161a; border:1.5px solid #1e1e26; border-radius:6px;"></div><div class="radius-token" style="color:#454d5e">sm · 6px</div></div>
+        <div class="radius-item"><div class="radius-box" style="background:#16161a; border:1.5px solid #1e1e26; border-radius:10px;"></div><div class="radius-token" style="color:#454d5e">md · 10px</div></div>
+        <div class="radius-item"><div class="radius-box" style="background:#16161a; border:1.5px solid #1e1e26; border-radius:14px;"></div><div class="radius-token" style="color:#454d5e">lg · 14px</div></div>
+        <div class="radius-item"><div class="radius-box" style="background:#16161a; border:1.5px solid #1e1e26; border-radius:20px;"></div><div class="radius-token" style="color:#454d5e">xl · 20px</div></div>
+        <div class="radius-item"><div class="radius-box" style="background:#16161a; border:1.5px solid #1e1e26; border-radius:9999px; width:56px; height:28px;"></div><div class="radius-token" style="color:#454d5e">full</div></div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<!-- ── MOTION ── -->
+<div class="section">
+  <div class="section-title">08 — Motion & Animation Tokens</div>
+  <div class="two-col">
+    <div class="arctic">
+      <div class="panel-label">Timing & Easing</div>
+      <div class="motion-grid">
+        <div class="motion-item">
+          <div class="motion-name" style="color:#0ea5e9">instant</div>
+          <div class="motion-val" style="color:#475569">100ms · ease-out</div>
+        </div>
+        <div class="motion-item">
+          <div class="motion-name" style="color:#0ea5e9">fast</div>
+          <div class="motion-val" style="color:#475569">150ms · ease-out</div>
+        </div>
+        <div class="motion-item">
+          <div class="motion-name" style="color:#0ea5e9">base</div>
+          <div class="motion-val" style="color:#475569">200ms · ease-in-out</div>
+        </div>
+        <div class="motion-item">
+          <div class="motion-name" style="color:#0ea5e9">slow</div>
+          <div class="motion-val" style="color:#475569">300ms · ease-in-out</div>
+        </div>
+        <div class="motion-item">
+          <div class="motion-name" style="color:#0ea5e9">spring</div>
+          <div class="motion-val" style="color:#475569">400ms · spring(1,80,10)</div>
+        </div>
+        <div class="motion-item">
+          <div class="motion-name" style="color:#0ea5e9">page</div>
+          <div class="motion-val" style="color:#475569">500ms · stagger 50ms</div>
+        </div>
+      </div>
+    </div>
+    <div class="obsidian">
+      <div class="panel-label">Timing & Easing</div>
+      <div class="motion-grid">
+        <div class="motion-item">
+          <div class="motion-name">instant</div>
+          <div class="motion-val">100ms · ease-out</div>
+        </div>
+        <div class="motion-item">
+          <div class="motion-name">fast</div>
+          <div class="motion-val">150ms · ease-out</div>
+        </div>
+        <div class="motion-item">
+          <div class="motion-name">base</div>
+          <div class="motion-val">200ms · ease-in-out</div>
+        </div>
+        <div class="motion-item">
+          <div class="motion-name">slow</div>
+          <div class="motion-val">300ms · ease-in-out</div>
+        </div>
+        <div class="motion-item">
+          <div class="motion-name">spring</div>
+          <div class="motion-val">400ms · spring(1,80,10)</div>
+        </div>
+        <div class="motion-item">
+          <div class="motion-name">page</div>
+          <div class="motion-val">500ms · stagger 50ms</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+</body>
+</html>
