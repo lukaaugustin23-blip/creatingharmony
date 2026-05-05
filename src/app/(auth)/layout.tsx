@@ -32,14 +32,16 @@ export default function AuthLayout({ children }: { children: React.ReactNode }) 
           display: 'flex',
           flexDirection: 'column',
           justifyContent: 'center',
-          alignItems: 'stretch',
-          padding: '48px 64px',
+          alignItems: 'center',
+          padding: '40px 32px',
           boxSizing: 'border-box',
-          overflow: 'hidden',
+          overflowY: 'auto',
           minWidth: 0,
         }}
       >
-        {children}
+        <div style={{ width: '100%', maxWidth: '420px' }}>
+          {children}
+        </div>
       </div>
     </div>
   )

@@ -23,6 +23,8 @@ export type ManageItem = 'projects' | 'leads' | 'invoices' | 'finances'
 export interface OnboardingData {
   theme: 'obsidian' | 'arctic'
   agencyName: string
+  agencyType: string
+  missionStatement: string
   teamSize: 'just-me' | '2-5' | '5-10' | '10+'
   manages: ManageItem[]
   stripeIntent: 'connect' | 'skip'

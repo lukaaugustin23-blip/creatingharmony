@@ -157,10 +157,10 @@ export default function SignupPage() {
       </motion.div>
 
       {/* Heading */}
-      <motion.div {...fade(0.10)} style={{ marginTop: '50px' }}>
+      <motion.div {...fade(0.10)} style={{ marginTop: '20px' }}>
         <h1 style={{
           fontFamily: 'var(--font-sora, Sora, sans-serif)',
-          fontSize: '36px', fontWeight: 700, color: AC.text,
+          fontSize: '28px', fontWeight: 700, color: AC.text,
           letterSpacing: '-0.04em', lineHeight: 1.1,
           margin: 0,
         }}>
@@ -169,7 +169,7 @@ export default function SignupPage() {
       </motion.div>
 
       {/* Subtitle */}
-      <motion.div {...fade(0.15)} style={{ marginTop: '50px' }}>
+      <motion.div {...fade(0.15)} style={{ marginTop: '20px' }}>
         <p style={{
           fontFamily: 'var(--font-dm-sans, DM Sans, sans-serif)',
           fontSize: '15px', color: AC.second, lineHeight: 1.5,
@@ -180,14 +180,14 @@ export default function SignupPage() {
       </motion.div>
 
       {generalError && (
-        <motion.div {...fade(0.18)} style={{ marginTop: '50px' }}>
+        <motion.div {...fade(0.18)} style={{ marginTop: '20px' }}>
           <AuthErrorBanner message={generalError} />
         </motion.div>
       )}
 
       <form onSubmit={handleSubmit} noValidate>
         {/* Full name */}
-        <motion.div {...fade(0.22)} style={{ marginTop: '50px' }}>
+        <motion.div {...fade(0.22)} style={{ marginTop: '20px' }}>
           <AuthLabel>Full name</AuthLabel>
           <AuthInput
             id="name" type="text" name="name" autoComplete="name"
@@ -199,7 +199,7 @@ export default function SignupPage() {
         </motion.div>
 
         {/* Email */}
-        <motion.div {...fade(0.28)} style={{ marginTop: '50px' }}>
+        <motion.div {...fade(0.28)} style={{ marginTop: '20px' }}>
           <AuthLabel>Email address</AuthLabel>
           <AuthInput
             id="email" type="email" name="email" autoComplete="email"
@@ -211,7 +211,7 @@ export default function SignupPage() {
         </motion.div>
 
         {/* Password */}
-        <motion.div {...fade(0.34)} style={{ marginTop: '50px' }}>
+        <motion.div {...fade(0.34)} style={{ marginTop: '20px' }}>
           <AuthLabel>Password</AuthLabel>
           <AuthPasswordInput
             id="password" name="password" autoComplete="new-password"
@@ -223,7 +223,7 @@ export default function SignupPage() {
         </motion.div>
 
         {/* Create Account */}
-        <motion.div {...fade(0.40)} style={{ marginTop: '50px' }}>
+        <motion.div {...fade(0.40)} style={{ marginTop: '20px' }}>
           <AuthSubmitButton
             loading={loading} disabled={busy}
             label="Create Account" loadingLabel="Creating account…"
@@ -232,12 +232,12 @@ export default function SignupPage() {
       </form>
 
       {/* OR divider */}
-      <motion.div {...fade(0.46)} style={{ marginTop: '50px' }}>
+      <motion.div {...fade(0.46)} style={{ marginTop: '20px' }}>
         <AuthDivider />
       </motion.div>
 
       {/* Google */}
-      <motion.div {...fade(0.52)} style={{ marginTop: '50px' }}>
+      <motion.div {...fade(0.52)} style={{ marginTop: '20px' }}>
         <AuthGoogleButton onClick={handleGoogle} loading={oauthLoading} disabled={busy} />
       </motion.div>
 
@@ -248,7 +248,7 @@ export default function SignupPage() {
           textAlign: 'center',
           fontFamily: 'var(--font-dm-sans, DM Sans, sans-serif)',
           fontSize: '13px', color: AC.second,
-          margin: 0, marginTop: '50px',
+          margin: 0, marginTop: '20px',
         }}
       >
         Already have an account?{' '}
